@@ -1,0 +1,25 @@
+{
+  "billingappApp": {
+    "transactionItems": {
+      "home": {
+        "title": "Transaction Items",
+        "createLabel": "Create a new Transaction Items",
+        "createOrEditLabel": "Create or edit a Transaction Items",
+        "notFound": "No Transaction Items found"
+      },
+      "created": "A new Transaction Items is created with identifier {{ param }}",
+      "updated": "A Transaction Items is updated with identifier {{ param }}",
+      "deleted": "A Transaction Items is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Transaction Items {{ id }}?"
+      },
+      "detail": {
+        "title": "Transaction Items"
+      },
+      "itemName": "Item Name",
+      "qty": "Qty",
+      "amount": "Amount",
+      "transaction": "Transaction"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.wyob.billingapp",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.1.0",
+    "applicationType": "monolith",
+    "baseName": "billingapp",
+    "packageName": "com.wyob.billingapp",
+    "packageFolder": "com/wyob/billingapp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZDUwMWY3ZjdlMzQwYzA1NWQ2YTM0N2ZkZDk2MmM0MmEwOTNhM2MxODM0YTU5N2ZmMTFkYjg2OWM0MWEzYmZiY2MzMmRlODkzMDg5MDhhNWVhMDI4N2FiMTYzMmFmMjA4NTZlYmQxY2IwMTQ2NGE3YzNlNTUxMTEwNjg2ODdjN2E=",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "hi"]
+  }
+}

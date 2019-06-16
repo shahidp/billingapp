@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-payment-heading" jhiTranslate="billingappApp.payment.home.createOrEditLabel">Create or edit a Payment</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.billNumber" for="field_billNumber">Bill Number</label>
+                    <input type="text" class="form-control" name="billNumber" id="field_billNumber"
+                           formControlName="billNumber"/>
+                    <div *ngIf="editForm.get('billNumber').invalid && (editForm.get('billNumber').dirty || editForm.get('billNumber').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('billNumber').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.billDate" for="field_billDate">Bill Date</label>
+                    <div class="input-group">
+                        <input id="field_billDate" type="text" class="form-control" name="billDate" ngbDatepicker  #billDateDp="ngbDatepicker" formControlName="billDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="billDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.paidAmount" for="field_paidAmount">Paid Amount</label>
+                    <input type="number" class="form-control" name="paidAmount" id="field_paidAmount"
+                           formControlName="paidAmount"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.modeOfPayment" for="field_modeOfPayment">Mode Of Payment</label>
+                    <input type="text" class="form-control" name="modeOfPayment" id="field_modeOfPayment"
+                           formControlName="modeOfPayment"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.modeOfDescription" for="field_modeOfDescription">Mode Of Description</label>
+                    <input type="text" class="form-control" name="modeOfDescription" id="field_modeOfDescription"
+                           formControlName="modeOfDescription"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.payid" for="field_payid">Payid</label>
+                    <input type="text" class="form-control" name="payid" id="field_payid"
+                           formControlName="payid"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="input-group">
+                        <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker  #createdDateDp="ngbDatepicker" formControlName="createdDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                           formControlName="lastModifiedBy"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                    <div class="input-group">
+                        <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" ngbDatepicker  #lastModifiedDateDp="ngbDatepicker" formControlName="lastModifiedDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="lastModifiedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="billingappApp.payment.transaction" for="field_transaction">Transaction</label>
+                    <select class="form-control" id="field_transaction" name="transaction" formControlName="transactionId">
+                        <option *ngIf="!editForm.get('transactionId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="transactionOption.id" *ngFor="let transactionOption of transactions; trackBy: trackTransactionById">{{transactionOption.id}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('transactionId').invalid && (editForm.get('transactionId').dirty || editForm.get('transactionId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('transactionId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

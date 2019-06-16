@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="payment">
+            <h2><span jhiTranslate="billingappApp.payment.detail.title">Payment</span> {{payment.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="billingappApp.payment.billNumber">Bill Number</span></dt>
+                <dd>
+                    <span>{{payment.billNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.billDate">Bill Date</span></dt>
+                <dd>
+                    <span>{{payment.billDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.paidAmount">Paid Amount</span></dt>
+                <dd>
+                    <span>{{payment.paidAmount}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.modeOfPayment">Mode Of Payment</span></dt>
+                <dd>
+                    <span>{{payment.modeOfPayment}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.modeOfDescription">Mode Of Description</span></dt>
+                <dd>
+                    <span>{{payment.modeOfDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.payid">Payid</span></dt>
+                <dd>
+                    <span>{{payment.payid}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{payment.createdBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{payment.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{payment.lastModifiedBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{payment.lastModifiedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.payment.transaction">Transaction</span></dt>
+                <dd>
+                    <div *ngIf="payment.transactionId">
+                        <a [routerLink]="['/transaction', payment.transactionId, 'view']">{{payment.transactionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/payment', payment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="billingappApp.customer.home.title">Customers</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-customer" [routerLink]="['/customer/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="billingappApp.customer.home.createLabel">
+            Create new Customer
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="customers?.length === 0">
+        <span jhiTranslate="billingappApp.customer.home.notFound">No customers found</span>
+    </div>
+    <div class="table-responsive" *ngIf="customers?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fname"><span jhiTranslate="billingappApp.customer.fname">Fname</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lname"><span jhiTranslate="billingappApp.customer.lname">Lname</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mobileNo"><span jhiTranslate="billingappApp.customer.mobileNo">Mobile No</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dob"><span jhiTranslate="billingappApp.customer.dob">Dob</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="addressLine1"><span jhiTranslate="billingappApp.customer.addressLine1">Address Line 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="addressLine2"><span jhiTranslate="billingappApp.customer.addressLine2">Address Line 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="city"><span jhiTranslate="billingappApp.customer.city">City</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="state"><span jhiTranslate="billingappApp.customer.state">State</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pincode"><span jhiTranslate="billingappApp.customer.pincode">Pincode</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="otherDetail"><span jhiTranslate="billingappApp.customer.otherDetail">Other Detail</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdBy"><span jhiTranslate="billingappApp.customer.createdBy">Created By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="billingappApp.customer.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="billingappApp.customer.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="billingappApp.customer.lastModifiedDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customer of customers ;trackBy: trackId">
+                <td><a [routerLink]="['/customer', customer.id, 'view' ]">{{customer.id}}</a></td>
+                <td>{{customer.fname}}</td>
+                <td>{{customer.lname}}</td>
+                <td>{{customer.mobileNo}}</td>
+                <td>{{customer.dob | date:'mediumDate'}}</td>
+                <td>{{customer.addressLine1}}</td>
+                <td>{{customer.addressLine2}}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.state}}</td>
+                <td>{{customer.pincode}}</td>
+                <td>{{customer.otherDetail}}</td>
+                <td>{{customer.createdBy}}</td>
+                <td>{{customer.createdDate | date:'medium'}}</td>
+                <td>{{customer.lastModifiedBy}}</td>
+                <td>{{customer.lastModifiedDate | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/customer', customer.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/customer', customer.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'customer', { outlets: { popup: customer.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="customers?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

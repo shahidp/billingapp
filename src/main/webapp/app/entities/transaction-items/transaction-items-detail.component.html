@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="transactionItems">
+            <h2><span jhiTranslate="billingappApp.transactionItems.detail.title">Transaction Items</span> {{transactionItems.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="billingappApp.transactionItems.itemName">Item Name</span></dt>
+                <dd>
+                    <span>{{transactionItems.itemName}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.transactionItems.qty">Qty</span></dt>
+                <dd>
+                    <span>{{transactionItems.qty}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.transactionItems.amount">Amount</span></dt>
+                <dd>
+                    <span>{{transactionItems.amount}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.transactionItems.transaction">Transaction</span></dt>
+                <dd>
+                    <div *ngIf="transactionItems.transactionId">
+                        <a [routerLink]="['/transaction', transactionItems.transactionId, 'view']">{{transactionItems.transactionId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/transaction-items', transactionItems.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

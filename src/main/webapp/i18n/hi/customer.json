@@ -1,0 +1,35 @@
+{
+  "billingappApp": {
+    "customer": {
+      "home": {
+        "title": "Customers",
+        "createLabel": "नया Customer बनाएँ",
+        "createOrEditLabel": "Customer बनाएँ या संपादित करें",
+        "notFound": "No Customer found"
+      },
+      "created": "एक नया Customer [identifier: {{ param }}] तैयार है",
+      "updated": "एक Customer [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Customer [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Customer [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Customer"
+      },
+      "fname": "Fname",
+      "lname": "Lname",
+      "mobileNo": "Mobile No",
+      "dob": "Dob",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "city": "City",
+      "state": "State",
+      "pincode": "Pincode",
+      "otherDetail": "Other Detail",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

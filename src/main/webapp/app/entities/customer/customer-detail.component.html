@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="customer">
+            <h2><span jhiTranslate="billingappApp.customer.detail.title">Customer</span> {{customer.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="billingappApp.customer.fname">Fname</span></dt>
+                <dd>
+                    <span>{{customer.fname}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.lname">Lname</span></dt>
+                <dd>
+                    <span>{{customer.lname}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.mobileNo">Mobile No</span></dt>
+                <dd>
+                    <span>{{customer.mobileNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.dob">Dob</span></dt>
+                <dd>
+                    <span>{{customer.dob}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.addressLine1">Address Line 1</span></dt>
+                <dd>
+                    <span>{{customer.addressLine1}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.addressLine2">Address Line 2</span></dt>
+                <dd>
+                    <span>{{customer.addressLine2}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.city">City</span></dt>
+                <dd>
+                    <span>{{customer.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.state">State</span></dt>
+                <dd>
+                    <span>{{customer.state}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.pincode">Pincode</span></dt>
+                <dd>
+                    <span>{{customer.pincode}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.otherDetail">Other Detail</span></dt>
+                <dd>
+                    <span>{{customer.otherDetail}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{customer.createdBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{customer.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{customer.lastModifiedBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="billingappApp.customer.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{customer.lastModifiedDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/customer', customer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

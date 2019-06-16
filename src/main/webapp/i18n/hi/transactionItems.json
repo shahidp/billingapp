@@ -1,0 +1,25 @@
+{
+  "billingappApp": {
+    "transactionItems": {
+      "home": {
+        "title": "TransactionItems",
+        "createLabel": "नया Transaction Items बनाएँ",
+        "createOrEditLabel": "Transaction Items बनाएँ या संपादित करें",
+        "notFound": "No Transaction Items found"
+      },
+      "created": "एक नया Transaction Items [identifier: {{ param }}] तैयार है",
+      "updated": "एक Transaction Items [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Transaction Items [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Transaction Items [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Transaction Items"
+      },
+      "itemName": "Item Name",
+      "qty": "Qty",
+      "amount": "Amount",
+      "transaction": "Transaction"
+    }
+  }
+}

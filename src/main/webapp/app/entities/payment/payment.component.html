@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="billingappApp.payment.home.title">Payments</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-payment" [routerLink]="['/payment/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="billingappApp.payment.home.createLabel">
+            Create new Payment
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="payments?.length === 0">
+        <span jhiTranslate="billingappApp.payment.home.notFound">No payments found</span>
+    </div>
+    <div class="table-responsive" *ngIf="payments?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="billNumber"><span jhiTranslate="billingappApp.payment.billNumber">Bill Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="billDate"><span jhiTranslate="billingappApp.payment.billDate">Bill Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="paidAmount"><span jhiTranslate="billingappApp.payment.paidAmount">Paid Amount</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modeOfPayment"><span jhiTranslate="billingappApp.payment.modeOfPayment">Mode Of Payment</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="modeOfDescription"><span jhiTranslate="billingappApp.payment.modeOfDescription">Mode Of Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="payid"><span jhiTranslate="billingappApp.payment.payid">Payid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdBy"><span jhiTranslate="billingappApp.payment.createdBy">Created By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="billingappApp.payment.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastModifiedBy"><span jhiTranslate="billingappApp.payment.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastModifiedDate"><span jhiTranslate="billingappApp.payment.lastModifiedDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="transactionId"><span jhiTranslate="billingappApp.payment.transaction">Transaction</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let payment of payments ;trackBy: trackId">
+                <td><a [routerLink]="['/payment', payment.id, 'view' ]">{{payment.id}}</a></td>
+                <td>{{payment.billNumber}}</td>
+                <td>{{payment.billDate | date:'mediumDate'}}</td>
+                <td>{{payment.paidAmount}}</td>
+                <td>{{payment.modeOfPayment}}</td>
+                <td>{{payment.modeOfDescription}}</td>
+                <td>{{payment.payid}}</td>
+                <td>{{payment.createdBy}}</td>
+                <td>{{payment.createdDate | date:'mediumDate'}}</td>
+                <td>{{payment.lastModifiedBy}}</td>
+                <td>{{payment.lastModifiedDate | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="payment.transactionId">
+                        <a [routerLink]="['../transaction', payment.transactionId , 'view' ]" >{{payment.transactionId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/payment', payment.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/payment', payment.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'payment', { outlets: { popup: payment.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="payments?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
